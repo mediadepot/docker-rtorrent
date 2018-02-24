@@ -1,6 +1,4 @@
-FROM lsiobase/alpine:3.7
-
-MAINTAINER romancin
+FROM lsiobase/alpine:3.7 as builder
 
 # set version label
 ARG BUILD_DATE
@@ -22,58 +20,37 @@ ENV CONTEXT_PATH=/
 RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} && \
  apk add --no-cache \
         ca-certificates \
-        fcgi \
-        ffmpeg \
-        geoip \
-        gzip \
-        logrotate \
-        nginx \
         dtach \
+        geoip \
+        libressl \
+		nodejs \
+		nodejs-npm \
+		python \
         tar \
         unrar \
         unzip \
-        sox \
         wget \
-        irssi \
-        irssi-perl \
-        zlib \
-        zlib-dev \
-        libxml2-dev \
-        perl-archive-zip \
-        perl-net-ssleay \
-        perl-digest-sha1 \
-        git \
-        libressl \
-        binutils \
-        findutils \
         zip \
-        php7 \
-        php7-cgi \
-        php7-fpm \
-        php7-json  \
-        php7-mbstring \
-        php7-sockets \
-        php7-pear && \
+        zlib-dev \
+        zlib && \
 
 # install build packages
  apk add --no-cache --virtual=build-dependencies \
         autoconf \
         automake \
+		binutils \
+        build-base \
         cppunit-dev \
-        perl-dev \
-        file \
-        g++ \
+        curl-dev \
         gcc \
+        git \
+        g++ \
+        libressl-dev \
         libtool \
+        linux-headers \
         make \
         ncurses-dev \
-        build-base \
-        libtool \
-        subversion \
-        cppunit-dev \
-        linux-headers \
-        curl-dev \
-        libressl-dev && \
+        subversion && \
 
 # compile curl to fix ssl for rtorrent
 cd /tmp && \
@@ -105,12 +82,6 @@ wget -qO- https://github.com/rakshasa/rtorrent/archive/${RTORRENT_VER}.tar.gz | 
 ./autogen.sh && ./configure --with-xmlrpc-c && make -j ${NB_CORES} && make install && \
 
 # install flood webui
- apk add --no-cache \
-     --repository http://dl-cdn.alpinelinux.org/alpine/v3.7/main \
-     python \
-     nodejs \
-     nodejs-npm && \
-
  mkdir /usr/flood && \
  cd /usr/flood && \
  git clone https://github.com/jfurrow/flood . && \

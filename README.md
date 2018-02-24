@@ -1,3 +1,8 @@
+# run commnad
+
+docker run --rm -p 3000:8081 -it 2e383d14e107
+
+
 # rutorrent-flood-docker
 A repository for creating a docker container including rtorrent with rutorrent and flood interfaces.
 
