@@ -70,7 +70,7 @@ network.max_open_files.set = 600
 # Enable the default ratio group.
 ratio.enable=
 # Change the limits, the defaults should be sufficient.
-ratio.max.set=0.1
+ratio.max.set=1
 
 # Stop seeding when .torrent from watch file is deleted
 schedule = untied_directory,5,5,stop_untied=
