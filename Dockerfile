@@ -1,4 +1,8 @@
 FROM lsiobase/alpine:3.7 as builder
+###############################################################################
+# Build Image
+# using modified version of https://github.com/romancin/rutorrent-flood-docker/
+###############################################################################
 
 # set version label
 ARG BUILD_DATE
@@ -99,6 +103,9 @@ rm config.js && \
 apk del --purge build-dependencies && \
 apk del -X http://dl-cdn.alpinelinux.org/alpine/v3.6/main cppunit-dev
 
+###############################################################################
+# Runtime Image
+###############################################################################
 
 FROM alpine as runtime
 MAINTAINER Jason Kulatunga <jason@thesparktree.com>
@@ -129,10 +136,11 @@ ENV LD_LIBRARY_PATH=/usr/local/lib
 
 #Create rtorrent folder structure & set as volumes
 RUN mkdir -p /srv/flood/app && \
+	mkdir -p /srv/rtorrent/app && \
 	mkdir -p /srv/rtorrent/config && \
 	mkdir -p /srv/rtorrent/data && \
-	mkdir -p /srv/rtorrent/tmpl && \
-	# create deluge storage structure
+
+	# create rtorrent storage structure
     mkdir -p /mnt/blackhole && \
     mkdir -p /mnt/processing && \
     mkdir -p /mnt/downloads
@@ -144,7 +152,7 @@ RUN apk add --no-cache \
         libressl \
 		nodejs \
 		nodejs-npm \
-#		python \
+		python \
         tar \
         unrar \
         unzip \

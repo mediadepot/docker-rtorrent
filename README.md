@@ -1,63 +1,62 @@
-# run commnad
-
-docker run --rm -p 3000:8081 -it 2e383d14e107
+# Requirements
 
 
-# rutorrent-flood-docker
-A repository for creating a docker container including rtorrent with rutorrent and flood interfaces.
+# Environmental
+The following environmental variables must be populated, when running container
 
-[![](https://images.microbadger.com/badges/version/romancin/rutorrent-flood.svg)](https://microbadger.com/images/romancin/rutorrent-flood "Docker image version")
-[![](https://images.microbadger.com/badges/image/romancin/rutorrent-flood.svg)](https://microbadger.com/images/romancin/rutorrent-flood "Docker image size")
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X2CT2SWQCP74U)
+- DEPOT_USER,
+- DEPOT_PASSWORD
+- DEPOT_PASSWORD_SALT
+- PUSHOVER_USER_KEY
 
-You can invite me a beer if you want ;) 
+# Ports
+The following ports must be mapped, when running container
 
-This is a completely funcional Docker image with flood, rutorrent, rtorrent, libtorrent and a lot of plugins 
-for rutorrent, like autodl-irssi, filemanager, fileshare and other useful ones.
+ - 8081 #webui listen
+ - 6881-6891 #daemon listen ports
 
-Based on Alpine Linux, which provides a very small size. 
+# Volumes
+The following volumes must be mapped, when running container
 
-Includes plugins: logoff fileshare filemanager pausewebui mobile ratiocolor force_save_session showip ...
+- /srv/deluge/config
+- /srv/deluge/data
 
-Also installed and selected by default this awesome theme: club-QuickBox
+- /mnt/blackhole
+- /mnt/processing
+- /mnt/downloads
 
-Also includes MaterialDesign theme as an option.
+The following subfolders should exist in the above mapped volumes:
 
-Tested and working on Synology and QNAP, but should work on any x86_64 devices.
+- /mnt/blackhole/tvshows
+- /mnt/blackhole/movies
+- /mnt/blackhole/music
+- /mnt/downloads/tvshows
+- /mnt/downloads/movies
+- /mnt/downloads/music
 
-Instructions: 
-- Map any local port to 443 for SSL rutorrent access (Default username/password is admin/admin) 
-- Map any local port to 51415 for rtorrent 
-- Map any local port to 3000 for SSL flood access
-- Map a local volume to /config (Stores configuration data, including rtorrent session directory. Consider this on SSD Disk) 
-- Map a local volume to /downloads (Stores downloaded torrents)
+# References
+- https://github.com/chamunks/alpine-rtorrent
+- https://freedif.org/flood-modern-web-ui-for-rtorrent/
+- https://superuser.com/questions/389621/rtorrent-different-default-save-directories-for-different-autolaunch-directori
+- https://github.com/rakshasa/rtorrent/wiki/TORRENT-Watch-directories
+- https://www.reddit.com/r/linux/comments/1s8kt1/rtorrent_how_to_watch_multiple_folders_and_save/
+- https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-dynamic-location
+- https://github.com/jfurrow/flood
+- https://github.com/nickvanw/alpine-rtorrent/blob/master/Dockerfile
+- https://github.com/Wonderfall/dockerfiles/blob/master/rtorrent-flood/Dockerfile
+- https://github.com/nodejs/node-gyp/issues/1237
 
-In order to change rutorrent web access password execute this inside container: 
-- sh -c "echo -n 'admin:' > /config/nginx/.htpasswd"
-- sh -c "openssl passwd -apr1 >> /config/nginx/.htpasswd"
 
-Sample run command:
+# TODO list
 
-For rtorrent 0.9.6 version: \
-\
-docker run -d --name=rutorrent-flood \
--v /share/Container/rutorrent-flood/config:/config \
--v /share/Container/rutorrent-flood/downloads:/downloads \
--e PGID=0 -e PUID=0 -e TZ=Europe/Madrid \
--p 9443:443 \
--p 3000:3000 \
--p 51415-51415:51415-51415 \
-romancin/rutorrent-flood:latest \
-
-For rtorrent 0.9.4 version: \
-\
-docker run -d --name=rutorrent-flood \
--v /share/Container/rutorrent-flood/config:/config \
--v /share/Container/rutorrent-flood/downloads:/downloads \
--e PGID=0 -e PUID=0 -e TZ=Europe/Madrid \
--p 9443:443 \
--p 3000:3000 \
--p 51415-51415:51415-51415 \
-romancin/rutorrent-flood:0.9.4 \
-
-Rememeber editing /config/rtorrent/rtorrent.rc with your own settings, specially your watch subfolder configuration.
+- [x] dynamic watch directories
+	- [ ] rename the torrent, once its loaded, delete the torrent when the torrent is complete
+	- [x] auto-start watch directory torrents
+- [x] download all torrents to /mnt/processing directory
+- [x] redirect rtorrent daemon logs to STDOUT
+- [ ] move completed downloads into dynamic `/mnt/downloads` subdirectories.
+- [ ] DEPOT default user/password authentication for webui
+- [ ] auto-labeling by watch folder compatible with flood
+- [ ] scheduling/QoS
+- [ ] Auto cleanup?
+- [ ] stop seeding when download is complete
