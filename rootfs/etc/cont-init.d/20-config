@@ -20,8 +20,8 @@ mkdir -p \
 
 
 # copy config files/set links etc...
-[[ ! -f /srv/rtorrent/app/flood/config.js ]] && \
-	cp /defaults/config.js /srv/rtorrent/app/flood/config.js
+[[ ! -f /srv/flood/app/config.js ]] && \
+	cp /defaults/config.js /srv/flood/app/config.js
 
 
 

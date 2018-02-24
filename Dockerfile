@@ -128,7 +128,7 @@ ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
 #Create rtorrent folder structure & set as volumes
-RUN mkdir -p /srv/rtorrent/app && \
+RUN mkdir -p /srv/flood/app && \
 	mkdir -p /srv/rtorrent/config && \
 	mkdir -p /srv/rtorrent/data && \
 	mkdir -p /srv/rtorrent/tmpl && \
@@ -144,7 +144,7 @@ RUN apk add --no-cache \
         libressl \
 		nodejs \
 		nodejs-npm \
-		python \
+#		python \
         tar \
         unrar \
         unzip \
@@ -156,9 +156,9 @@ RUN apk add --no-cache \
 
 # Copy the build artifacts from the builder stage.
 COPY --from=builder /tmp/artifacts /
-COPY --from=builder /usr/flood /srv/rtorrent/app/flood
+COPY --from=builder /usr/flood /srv/flood/app
 # add local files
-COPY root/ /
+COPY rootfs/ /
 
 # ports and volumes
 VOLUME ["/srv/rtorrent/config", "/srv/rtorrent/data"]

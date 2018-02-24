@@ -1,4 +1,4 @@
 #!/bin/sh
 echo "starting flood"
-cd /srv/rtorrent/app/flood
+cd /srv/flood/app
 npm start
