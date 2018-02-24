@@ -1,18 +1,20 @@
 #!/usr/bin/with-contenv bash
 
-if [ -f "/detach_sess/.rtorrent" ]; then
-rm -f /detach_sess/.rtorrent || true
+if [ -f "/srv/rtorrent/data/dtach-rtorrent.lock" ]; then
+rm -f /srv/rtorrent/data/dtach-rtorrent.lock || true
 sleep 1s
 fi
 
-dtach -n /detach_sess/.rtorrent \
-s6-setuidgid abc /usr/local/bin/rtorrent \
--n -o import=/config/rtorrent/rtorrent.rc
+echo "starting rtorrent"
+dtach -n /srv/rtorrent/data/dtach-rtorrent.lock \
+s6-setuidgid mediadepot /usr/local/bin/rtorrent \
+-n -o import=/srv/rtorrent/config/rtorrent.rc
 
-until [ -e "/config/rtorrent/rtorrent_sess/rtorrent.lock" ];
+until [ -e "/srv/rtorrent/data/session/rtorrent.lock" ];
 do
 sleep 1s
 done
 
-rtorrent_pid=$(< /config/rtorrent/rtorrent_sess/rtorrent.lock | cut -d '+' -f 2)
-tail -n 1 -f /config/log/rtorrent/rtorrent.log "$rtorrent_pid"
+
+rtorrent_pid=$(< /srv/rtorrent/data/session/rtorrent.lock | cut -d '+' -f 2)
+tail -n 1 -f /srv/rtorrent/data/rtorrent.log "$rtorrent_pid"

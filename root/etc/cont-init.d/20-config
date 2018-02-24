@@ -1,28 +1,30 @@
 #!/usr/bin/with-contenv bash
 
 # make folders (Original)
-# mkdir -p \
-	/config{/log/nginx,/log/rtorrent,/log/rutorrent,/nginx,/nginx/conf.d,/php,/rtorrent/rtorrent_sess,/rutorrent/settings/users} \
-	/downloads{/completed,/incoming,/watched} \
+mkdir -p \
+	/srv/rtorrent/data/flood/db/ \
+	/srv/rtorrent/data/session/
 
 # make folders
 mkdir -p \
 	/config{/log/nginx,/log/rtorrent,/log/rutorrent,/nginx,/nginx/conf.d,/php,/rtorrent/rtorrent_sess,/rutorrent/settings/users,/.irssi,/flood} \
 
 
-[[ ! -e /config/rtorrent/rtorrent.rc ]] && \
-	cp /defaults/rtorrent.rc /config/rtorrent/rtorrent.rc
+[[ ! -e /srv/rtorrent/config/rtorrent.rc ]] && \
+	cp /defaults/rtorrent.rc /srv/rtorrent/config/rtorrent.rc
 
 
 # delete lock file if exists
-[[ -e /config/rtorrent/rtorrent_sess/rtorrent.lock ]] && \
-	rm /config/rtorrent/rtorrent_sess/rtorrent.lock
+[[ -e /srv/rtorrent/data/session/rtorrent.lock ]] && \
+	rm /srv/rtorrent/data/session/rtorrent.lock
+
+
+# copy config files/set links etc...
+[[ ! -f /srv/rtorrent/app/flood/config.js ]] && \
+	cp /defaults/config.js /srv/rtorrent/app/flood/config.js
+
+
 
 # permissions
-chown abc:abc \
-	/downloads
-
-
-chown -R abc:abc \
-	/config \
-	/run \
+chown mediadepot:mediadepot -R /srv/rtorrent/data/
+chown mediadepot:mediadepot -R /srv/rtorrent/config/

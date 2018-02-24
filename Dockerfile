@@ -100,13 +100,45 @@ apk del --purge build-dependencies && \
 apk del -X http://dl-cdn.alpinelinux.org/alpine/v3.6/main cppunit-dev
 
 
-FROM lsiobase/alpine:3.7 as runtime
+FROM alpine as runtime
+MAINTAINER Jason Kulatunga <jason@thesparktree.com>
+
+# root filesystem
+RUN mkdir -p /etc/cont-finish.d \
+	/etc/cont-init.d \
+	/etc/fix-attrs.d \
+	/etc/services.d
+
+# copy over distribution config.sh file. Configures container user & group with customizable PID & GID
+WORKDIR /srv/
+
+RUN apk --update --no-cache add \
+    curl && \
+    mkdir ~/.ssh && \
+    curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v1.18.1.5/s6-overlay-amd64.tar.gz \
+  	| tar xvzf - -C /
+
+
+
+### END OF MEDIADEPOT BASE
+
 
 # set env
 ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
+#Create rtorrent folder structure & set as volumes
+RUN mkdir -p /srv/rtorrent/app && \
+	mkdir -p /srv/rtorrent/config && \
+	mkdir -p /srv/rtorrent/data && \
+	mkdir -p /srv/rtorrent/tmpl && \
+	# create deluge storage structure
+    mkdir -p /mnt/blackhole && \
+    mkdir -p /mnt/processing && \
+    mkdir -p /mnt/downloads
+
 RUN apk add --no-cache \
+		bash \
         ca-certificates \
         dtach \
         libressl \
@@ -124,10 +156,13 @@ RUN apk add --no-cache \
 
 # Copy the build artifacts from the builder stage.
 COPY --from=builder /tmp/artifacts /
-COPY --from=builder /usr/flood /usr/flood
+COPY --from=builder /usr/flood /srv/rtorrent/app/flood
 # add local files
 COPY root/ /
 
 # ports and volumes
+VOLUME ["/srv/rtorrent/config", "/srv/rtorrent/data"]
 EXPOSE 443 51415 3000
-VOLUME /config /downloads
+
+CMD ["/init"]
+
