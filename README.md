@@ -50,13 +50,16 @@ The following subfolders should exist in the above mapped volumes:
 # TODO list
 
 - [x] dynamic watch directories
-	- [ ] rename the torrent, once its loaded, delete the torrent when the torrent is complete
+	- [ ] [rename the torrent, once its loaded, delete the torrent when the torrent is complete](https://github.com/rtorrent-community/rtorrent-docs/blob/master/docs/examples/rename2tied.sh)
 	- [x] auto-start watch directory torrents
 - [x] download all torrents to /mnt/processing directory
-- [x] redirect rtorrent daemon logs to STDOUT
-- [ ] move completed downloads into dynamic `/mnt/downloads` subdirectories.
+- [?] redirect rtorrent daemon logs to STDOUT
+- [ ] move completed downloads into dynamic `/mnt/downloads` subdirectories. [1](https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#versatile-move) [2](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
 - [ ] DEPOT default user/password authentication for webui
-- [ ] auto-labeling by watch folder compatible with flood
-- [ ] scheduling/QoS
+- [x] auto-labeling by watch folder compatible with flood
+- [ ] [scheduling/QoS](http://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#scheduled-bandwidth-shaping)
 - [ ] Auto cleanup?
-- [ ] stop seeding when download is complete
+- [ ] [stop seeding when download is complete](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
+- [ ] [Performance tuning](https://github.com/rakshasa/rtorrent/wiki/Performance-Tuning)
+- [ ] logrotate
+- [ ] better logging.
