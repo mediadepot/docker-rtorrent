@@ -87,11 +87,10 @@ system.method.insert=movedir,simple,"d.set_directory=$d.get_custom=auto;execute=
 schedule = session_save,240,300,session_save=
 
 
-
 ###############################################################################
 # Watch directories
 ###############################################################################
 # create a default watch directory
-schedule2 = watch_directory_default, 0, 10, "load.start=/mnt/blackhole/*.torrent,\"d.custom.set=incomplete,1\""
+schedule2 = watch_directory_default, 0, 10, "load.start=/mnt/blackhole/*.torrent,d.custom1.set=unsorted"
 
 # Dynamically generated watch directories (added by cont-init.d script)

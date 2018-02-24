@@ -31,7 +31,7 @@ blackhole_subfolders = [os.path.basename(x[0]) for x in os.walk('/mnt/blackhole'
 
 with open('/srv/rtorrent/config/rtorrent.rc', 'a') as rcfile:
     for folder_name in list(set(download_subfolders).intersection(blackhole_subfolders)):
-        line = r'schedule2 = watch_directory_{0}, 0, 10, "load.start=/mnt/blackhole/{0}/*.torrent,\"d.custom.set=Tags,{0}\""'.format(folder_name)
+        line = r'schedule2 = watch_directory_{0}, 0, 10, "load.start=/mnt/blackhole/{0}/*.torrent,d.custom1.set={0}"'.format(folder_name)
         rcfile.write(line + "\n")
 
 HEREDOC
