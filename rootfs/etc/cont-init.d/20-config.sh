@@ -9,6 +9,7 @@ mkdir -p \
 # TODO: for testing:
 mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
 chown mediadepot:mediadepot /mnt/processing
+chown mediadepot:mediadepot /mnt/downloads
 
 # flood config file
 [[ ! -f /srv/flood/app/config.js ]] && \

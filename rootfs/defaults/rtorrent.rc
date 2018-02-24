@@ -2,7 +2,7 @@
 execute.nothrow = rm,/tmp/.rtorrent.sock
 network.scgi.open_local = /tmp/.rtorrent.sock
 schedule = socket_chmod,0,0,"execute=chmod,0660,/tmp/.rtorrent.sock"
-schedule = socket_chgrp,0,0,"execute=chgrp,abc,/tmp/.rtorrent.sock"
+schedule = socket_chgrp,0,0,"execute=chgrp,mediadepot,/tmp/.rtorrent.sock"
 
 # Directory Management
 directory = /mnt/processing/
@@ -11,6 +11,11 @@ session = /srv/rtorrent/data/session
 # Log file management
 log.open_file = "rtorrent", /srv/rtorrent/data/rtorrent.log
 log.add_output = "info", "rtorrent"
+log.add_output = "thread_info", "rtorrent"
+log.add_output = "torrent_info", "rtorrent"
+
+log.execute = (cat, "/srv/rtorrent/data/execute.log")
+
 
 # General Parameters
 check_hash = no
@@ -78,14 +83,14 @@ schedule = untied_directory,5,5,stop_untied=
 # Pause torrents when free space is only 1GB 
 schedule = low_diskspace,5,60,close_low_diskspace=1024M
 
-# Move the downloaded data to the tracker directory below Downloads
-system.method.set_key = event.download.finished,move_complete,"branch={$movecheck=,movedir=}"
-system.method.insert=movecheck,simple,"and={d.get_complete=,d.get_custom=auto}"
-system.method.insert=movedir,simple,"d.set_directory=$d.get_custom=auto;execute=mv,-f,$d.get_base_path=,$d.get_custom=auto"
-
 # Commit session data
 schedule = session_save,240,300,session_save=
 
+# Move complete and stop.
+method.insert = d.label_download_dir, simple, "cat=/mnt/downloads/, (d.custom1)"
+method.insert = d.data_full_path, simple, "branch=((d.is_multi_file)),((cat,(d.directory))),((cat,(d.directory),/,(d.name)))"
+method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,$argument.0=,$argument.1=; d.save_full_session="
+method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_full_path=,$d.label_download_dir="
 
 ###############################################################################
 # Watch directories
