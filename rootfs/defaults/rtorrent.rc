@@ -15,7 +15,7 @@ method.insert = cfg.logfile, private|const|string, (cat,(cfg.datadir),"rtorrent.
 execute.nothrow = rm,/run/rtorrent/rtorrent.sock
 network.scgi.open_local = /run/rtorrent/rtorrent.sock
 schedule = socket_chmod,0,0,"execute=chmod,0666,/run/rtorrent/rtorrent.sock"
-schedule = socket_chgrp,0,0,"execute=chgrp,mediadepot,/run/rtorrent/rtorrent.sock"
+#schedule = socket_chgrp,0,0,"execute=chgrp,mediadepot,/run/rtorrent/rtorrent.sock"
 
 # Directory Management
 directory = /mnt/processing/

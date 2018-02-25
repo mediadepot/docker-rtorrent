@@ -9,11 +9,11 @@ mkdir -p \
 
 
 #TODO: for testing:
-rm -rf /mnt/downloads/test1
-rm -rf /mnt/downloads/test2
-mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
-chown mediadepot:mediadepot /mnt/processing
-chown mediadepot:mediadepot /mnt/downloads
+#rm -rf /mnt/downloads/test1
+#rm -rf /mnt/downloads/test2
+#mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
+#chown mediadepot:mediadepot /mnt/processing
+#chown mediadepot:mediadepot /mnt/downloads
 
 # flood config file
 [[ ! -f /srv/flood/app/config.js ]] && \
@@ -51,9 +51,9 @@ fi
 
 
 # permissions
-chown mediadepot:mediadepot -R /srv/rtorrent/data/
-chown mediadepot:mediadepot -R /srv/rtorrent/config/
-chown mediadepot:mediadepot -R /run/rtorrent/
+chown mediadepot:users -R /srv/rtorrent/data/
+chown mediadepot:users -R /srv/rtorrent/config/
+chown mediadepot:users -R /run/rtorrent/
 
 
 
