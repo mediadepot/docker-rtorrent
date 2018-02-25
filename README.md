@@ -64,3 +64,4 @@ The following subfolders should exist in the above mapped volumes:
 - [x] ensure that deleting a partially downloaded/inprogress torrent will actually delete the associated data
 	- [ ] when deleting a torrent we should always delete the .torrent file too
 	- [ ] when deleting a torrent, sometimes the download directory is not deleted.
+
