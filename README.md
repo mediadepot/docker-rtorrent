@@ -6,8 +6,6 @@ The following environmental variables must be populated, when running container
 
 - DEPOT_USER,
 - DEPOT_PASSWORD
-- DEPOT_PASSWORD_SALT
-- PUSHOVER_USER_KEY
 
 # Ports
 The following ports must be mapped, when running container
@@ -18,9 +16,8 @@ The following ports must be mapped, when running container
 # Volumes
 The following volumes must be mapped, when running container
 
-- /srv/deluge/config
-- /srv/deluge/data
-
+- /srv/rtorrent/config
+- /srv/rtorrent/data
 - /mnt/blackhole
 - /mnt/processing
 - /mnt/downloads
@@ -35,6 +32,7 @@ The following subfolders should exist in the above mapped volumes:
 - /mnt/downloads/music
 
 # References
+
 - https://github.com/chamunks/alpine-rtorrent
 - https://freedif.org/flood-modern-web-ui-for-rtorrent/
 - https://superuser.com/questions/389621/rtorrent-different-default-save-directories-for-different-autolaunch-directori
@@ -63,7 +61,6 @@ The following subfolders should exist in the above mapped volumes:
 - [ ] [Performance tuning](https://github.com/rakshasa/rtorrent/wiki/Performance-Tuning)
 - [ ] logrotate
 - [ ] [better logging. ](https://serverfault.com/questions/599103/make-a-docker-application-write-to-stdout)
-- [ ] ensure that deleting a partially downloaded/inprogress torrent will actually delete the associated data
+- [x] ensure that deleting a partially downloaded/inprogress torrent will actually delete the associated data
 	- [ ] when deleting a torrent we should always delete the .torrent file too
 	- [ ] when deleting a torrent, sometimes the download directory is not deleted.
-- [ ] what happens when you delete a torrent that's arleady stopped? (Delete torrent file, and/or data?)
