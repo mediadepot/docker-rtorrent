@@ -48,9 +48,9 @@ The following subfolders should exist in the above mapped volumes:
 
 
 # TODO list
-
+- [x] catchall watch folder (/mnt/blackhole/*.torrent) should work correctly and download to "unsorted"
 - [x] dynamic watch directories
-	- [ ] [rename the torrent, once its loaded, delete the torrent when the torrent is complete](https://github.com/rtorrent-community/rtorrent-docs/blob/master/docs/examples/rename2tied.sh)
+	- [x] [remove the torrent from the watch directory once its loaded](https://github.com/rtorrent-community/rtorrent-docs/blob/master/docs/examples/rename2tied.sh)
 	- [x] auto-start watch directory torrents
 - [x] download all torrents to /mnt/processing directory
 - [?] redirect rtorrent daemon logs to STDOUT
@@ -58,10 +58,12 @@ The following subfolders should exist in the above mapped volumes:
 - [ ] DEPOT default user/password authentication for webui
 - [x] auto-labeling by watch folder compatible with flood
 - [ ] [scheduling/QoS](http://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#scheduled-bandwidth-shaping)
-- [ ] Auto cleanup?
+- [ ] Auto cleanup? Completed torrents that are stopped and older than 2 months?
 - [x] [stop seeding when download is complete](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
 - [ ] [Performance tuning](https://github.com/rakshasa/rtorrent/wiki/Performance-Tuning)
 - [ ] logrotate
 - [ ] [better logging. ](https://serverfault.com/questions/599103/make-a-docker-application-write-to-stdout)
 - [ ] ensure that deleting a partially downloaded/inprogress torrent will actually delete the associated data
+	- [ ] when deleting a torrent we should always delete the .torrent file too
+	- [ ] when deleting a torrent, sometimes the download directory is not deleted.
 - [ ] what happens when you delete a torrent that's arleady stopped? (Delete torrent file, and/or data?)
