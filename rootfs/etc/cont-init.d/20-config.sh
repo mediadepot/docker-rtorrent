@@ -3,13 +3,16 @@
 # make folders (Original)
 mkdir -p \
 	/srv/rtorrent/data/flood/db/ \
-	/srv/rtorrent/data/session/
+	/srv/rtorrent/data/session/ \
+	/srv/rtorrent/data/torrents/
 
 
 #TODO: for testing:
-#mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
-#chown mediadepot:mediadepot /mnt/processing
-#chown mediadepot:mediadepot /mnt/downloads
+rm -rf /mnt/downloads/test1
+rm -rf /mnt/downloads/test2
+mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
+chown mediadepot:mediadepot /mnt/processing
+chown mediadepot:mediadepot /mnt/downloads
 
 # flood config file
 [[ ! -f /srv/flood/app/config.js ]] && \

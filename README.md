@@ -59,7 +59,9 @@ The following subfolders should exist in the above mapped volumes:
 - [x] auto-labeling by watch folder compatible with flood
 - [ ] [scheduling/QoS](http://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#scheduled-bandwidth-shaping)
 - [ ] Auto cleanup?
-- [ ] [stop seeding when download is complete](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
+- [x] [stop seeding when download is complete](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
 - [ ] [Performance tuning](https://github.com/rakshasa/rtorrent/wiki/Performance-Tuning)
 - [ ] logrotate
-- [ ] better logging.
+- [ ] [better logging. ](https://serverfault.com/questions/599103/make-a-docker-application-write-to-stdout)
+- [ ] ensure that deleting a partially downloaded/inprogress torrent will actually delete the associated data
+- [ ] what happens when you delete a torrent that's arleady stopped? (Delete torrent file, and/or data?)

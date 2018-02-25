@@ -15,7 +15,7 @@ log.add_output = "thread_info", "rtorrent"
 log.add_output = "torrent_info", "rtorrent"
 
 # DEBUGGING, log the execute statements to its own log file.
-#log.execute = /srv/rtorrent/data/execute.log
+log.execute = /srv/rtorrent/data/execute.log
 
 
 # General Parameters
@@ -76,10 +76,12 @@ network.max_open_files.set = 600
 # Enable the default ratio group.
 ratio.enable=
 # Change the limits, the defaults should be sufficient.
+ratio.min.set=0
 ratio.max.set=1
+ratio.upload.set=1b
 
 # Stop seeding when .torrent from watch file is deleted
-schedule = untied_directory,5,5,stop_untied=
+#schedule = untied_directory,5,5,stop_untied=
 
 # Pause torrents when free space is only 1GB 
 schedule = low_diskspace,5,60,close_low_diskspace=1024M
@@ -87,11 +89,18 @@ schedule = low_diskspace,5,60,close_low_diskspace=1024M
 # Commit session data
 schedule = session_save,240,300,session_save=
 
-# Move complete and stop.
+# Move complete and delete torrent.
 method.insert = d.label_download_dir, simple, "cat=/mnt/downloads/, (d.custom1)"
 method.insert = d.data_full_path, simple, "branch=((d.is_multi_file)),((cat,(d.directory))),((cat,(d.directory),/,(d.name)))"
 method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,$argument.0=,$argument.1=; d.save_full_session="
-method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_full_path=,$d.label_download_dir=; d.stop"
+method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_full_path=,$d.label_download_dir=; d.stop=;"
+
+# rename torrent after its been added - https://github.com/rakshasa/rtorrent/issues/385
+#method.insert = d.meta_basename, simple|string|private, "execute.capture=basename,\"$d.loaded_file=\",.torrent"
+#method.insert = d.meta_final_path, simple|string|private, "cat=/srv/rtorrent/data/torrents/,$d.meta_basename=,.torrent"
+#method.insert = d.move_meta, simple, "execute=mv,$d.loaded_file=,$d.meta_final_path=;d.loaded_file.set=,$d.meta_final_path="
+#method.set_key = event.download.inserted_new,move_tor,"d.stop=; d.move_meta; d.start="
+
 
 ###############################################################################
 # Watch directories
