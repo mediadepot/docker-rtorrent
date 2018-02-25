@@ -54,7 +54,7 @@ The following subfolders should exist in the above mapped volumes:
 	- [x] auto-start watch directory torrents
 - [x] download all torrents to /mnt/processing directory
 - [?] redirect rtorrent daemon logs to STDOUT
-- [ ] move completed downloads into dynamic `/mnt/downloads` subdirectories. [1](https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#versatile-move) [2](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
+- [x] move completed downloads into dynamic `/mnt/downloads` subdirectories. [1](https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#versatile-move) [2](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
 - [ ] DEPOT default user/password authentication for webui
 - [x] auto-labeling by watch folder compatible with flood
 - [ ] [scheduling/QoS](http://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#scheduled-bandwidth-shaping)

@@ -6,15 +6,15 @@ mkdir -p \
 	/srv/rtorrent/data/session/
 
 
-# TODO: for testing:
-mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
-chown mediadepot:mediadepot /mnt/processing
-chown mediadepot:mediadepot /mnt/downloads
+#TODO: for testing:
+#mkdir -p /mnt/downloads/test1 /mnt/downloads/test2 /mnt/blackhole/test1 /mnt/blackhole/test2
+#chown mediadepot:mediadepot /mnt/processing
+#chown mediadepot:mediadepot /mnt/downloads
 
 # flood config file
 [[ ! -f /srv/flood/app/config.js ]] && \
 	cp /defaults/config.js /srv/flood/app/config.js
-	#TODO can we set the base user here?
+	#TODO: can we set the base user here?
 
 # rtorrent configuration
 if [ ! -f /srv/rtorrent/config/rtorrent.rc ]; then
