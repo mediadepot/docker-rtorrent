@@ -64,8 +64,9 @@ ldconfig /usr/bin && ldconfig /usr/lib && \
 
 # compile xmlrpc-c
 cd /tmp && \
-svn checkout http://svn.code.sf.net/p/xmlrpc-c/code/stable xmlrpc-c && \
+mkdir xmlrpc-c && \
 cd /tmp/xmlrpc-c && \
+wget -qO- https://github.com/mirror/xmlrpc-c/archive/master.tar.gz | tar xz --strip-components=2 xmlrpc-c-master/stable && \
 ./configure --with-libwww-ssl --disable-wininet-client --disable-curl-client --disable-libwww-client --disable-abyss-server --disable-cgi-server && make -j ${NB_CORES} && \
 make install && make install DESTDIR=/tmp/artifacts && \
 
