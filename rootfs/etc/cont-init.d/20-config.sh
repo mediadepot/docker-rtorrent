@@ -15,6 +15,11 @@ mkdir -p \
 #chown mediadepot:mediadepot /mnt/processing
 #chown mediadepot:mediadepot /mnt/downloads
 
+# create the flood-rtorrent communications socket manually, because rtorrent screws up permissions
+rm -rf /run/rtorrent/rtorrent.sock
+python -c "import socket as s; sock = s.socket(s.AF_UNIX); sock.bind('/run/rtorrent/rtorrent.sock')"
+chmod 0777 /run/rtorrent/rtorrent.sock
+
 # flood config file
 [[ ! -f /srv/flood/app/config.js ]] && \
 	cp /defaults/config.js /srv/flood/app/config.js
