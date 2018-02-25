@@ -57,7 +57,7 @@ The following subfolders should exist in the above mapped volumes:
 - [x] move completed downloads into dynamic `/mnt/downloads` subdirectories. [1](https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#versatile-move) [2](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
 - [ ] DEPOT default user/password authentication for webui
 - [x] auto-labeling by watch folder compatible with flood
-- [ ] [scheduling/QoS](http://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#scheduled-bandwidth-shaping)
+- [-] [scheduling/QoS](http://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#scheduled-bandwidth-shaping)
 - [ ] Auto cleanup? Completed torrents that are stopped and older than 2 months?
 - [x] [stop seeding when download is complete](https://github.com/rakshasa/rtorrent/wiki/Common-Tasks-in-rTorrent#move-completed-torrents-to-a-fixed-location)
 - [ ] [Performance tuning](https://github.com/rakshasa/rtorrent/wiki/Performance-Tuning)

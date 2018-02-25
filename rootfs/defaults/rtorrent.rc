@@ -1,3 +1,16 @@
+# configure directories
+method.insert = cfg.blackhole, private|const|string, (cat,"/mnt/blackhole/")
+method.insert = cfg.downloads, private|const|string, (cat,"/mnt/downloads/")
+method.insert = cfg.processing, private|const|string, (cat,"/mnt/processing/")
+
+method.insert = cfg.basedir, private|const|string, (cat,"/srv/rtorrent/")
+method.insert = cfg.datadir, private|const|string, (cat,(cfg.basedir),"data/")
+method.insert = cfg.torrentsdir, private|const|string, (cat,(cfg.datadir),"torrents/")
+
+
+method.insert = cfg.logfile, private|const|string, (cat,(cfg.datadir),"rtorrent.log")
+
+
 # Prepare rtorrent communication socket
 execute.nothrow = rm,/tmp/.rtorrent.sock
 network.scgi.open_local = /tmp/.rtorrent.sock
@@ -9,13 +22,13 @@ directory = /mnt/processing/
 session = /srv/rtorrent/data/session
 
 # Log file management
-log.open_file = "rtorrent", /srv/rtorrent/data/rtorrent.log
+log.open_file = "rtorrent", (cat, (cfg.logfile))
 log.add_output = "info", "rtorrent"
 log.add_output = "thread_info", "rtorrent"
 log.add_output = "torrent_info", "rtorrent"
 
 # DEBUGGING, log the execute statements to its own log file.
-log.execute = /srv/rtorrent/data/execute.log
+log.execute = (cat, (cfg.logfile))
 
 
 # General Parameters
@@ -72,6 +85,11 @@ trackers.numwant.set = 100
 network.max_open_sockets.set = 999
 # Maximum number of open files rtorrent can keep open (you have to modify the system wide settings with ulimit!) (`set_max_open_files`)
 network.max_open_files.set = 600
+
+#scheduled throttling not great because of
+#schedule2 = throttle_1,01:00:00,24:00:00,throttle.global_down.max_rate.set_kb=0
+#schedule2 = throttle_2,05:00:00,24:00:00,throttle.global_down.max_rate.set_kb=2500
+
 
 # Enable the default ratio group.
 ratio.enable=
