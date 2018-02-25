@@ -15,6 +15,11 @@ do
 sleep 1s
 done
 
+echo "rtorrent started"
+
+# sleep now, rtorrent is running as a detached process, logs are redirected to STDOUT.
+#while :; do sleep 2073600; done
+
 
 #rtorrent_pid=$(< /srv/rtorrent/data/session/rtorrent.lock | cut -d '+' -f 2)
 tail -n 1 -f /srv/rtorrent/data/rtorrent.log

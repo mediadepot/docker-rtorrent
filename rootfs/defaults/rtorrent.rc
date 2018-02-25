@@ -96,10 +96,10 @@ method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execu
 method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_full_path=,$d.label_download_dir=; d.stop=;"
 
 # rename torrent after its been added - https://github.com/rakshasa/rtorrent/issues/385
-#method.insert = d.meta_basename, simple|string|private, "execute.capture=basename,\"$d.loaded_file=\",.torrent"
-#method.insert = d.meta_final_path, simple|string|private, "cat=/srv/rtorrent/data/torrents/,$d.meta_basename=,.torrent"
-#method.insert = d.move_meta, simple, "execute=mv,$d.loaded_file=,$d.meta_final_path=;d.loaded_file.set=,$d.meta_final_path="
-#method.set_key = event.download.inserted_new,move_tor,"d.stop=; d.move_meta; d.start="
+method.insert = d.meta_basename, simple|string|private, "execute.capture=basename,\"$d.loaded_file=\",.torrent"
+method.insert = d.meta_final_path, simple|string|private, "cat=/srv/rtorrent/data/torrents/,$d.meta_basename=,.torrent"
+method.insert = d.move_meta, simple, "execute=mv,$d.loaded_file=,$d.meta_final_path=;d.loaded_file.set=$d.meta_final_path="
+method.set_key = event.download.inserted_new,move_tor,"d.stop=; d.move_meta=; d.start="
 
 
 ###############################################################################
