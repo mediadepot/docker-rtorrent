@@ -64,8 +64,8 @@ system.file_allocate.set = yes
 # tuning parameters
 pieces.preload.type.set = 1
 # Global upload and download rate in KiB, `0` for unlimited (`download_rate`, `upload_rate`)
-throttle.global_down.max_rate.set_kb = 8700
-throttle.global_up.max_rate.set_kb   = 2200
+throttle.global_down.max_rate.set_kb = 4000
+throttle.global_up.max_rate.set_kb   = 4000
 # Maximum number of simultaneous downloads and uploads slots (global slots!) (`max_downloads_global`, `max_uploads_global`)
 throttle.max_downloads.global.set = 300
 throttle.max_uploads.global.set   = 300
