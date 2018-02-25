@@ -4,7 +4,8 @@
 mkdir -p \
 	/srv/rtorrent/data/flood/db/ \
 	/srv/rtorrent/data/session/ \
-	/srv/rtorrent/data/torrents/
+	/srv/rtorrent/data/torrents/ \
+	/run/rtorrent/
 
 
 #TODO: for testing:
@@ -52,6 +53,8 @@ fi
 # permissions
 chown mediadepot:mediadepot -R /srv/rtorrent/data/
 chown mediadepot:mediadepot -R /srv/rtorrent/config/
+chown mediadepot:mediadepot -R /run/rtorrent/
+
 
 
 

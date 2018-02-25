@@ -11,7 +11,7 @@ const CONFIG = {
     host: 'localhost',
     port: 5000,
     socket: true,
-    socketPath: '/tmp/.rtorrent.sock'
+    socketPath: '/run/rtorrent/rtorrent.sock'
   },
   ssl: false,
   sslKey: '/srv/rtorrent/data/flood/flood_ssl.key',
