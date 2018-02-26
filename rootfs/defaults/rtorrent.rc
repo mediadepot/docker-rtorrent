@@ -33,8 +33,9 @@ log.execute = (cat, (cfg.logfile))
 
 # General Parameters
 check_hash = no
-dht = off
-peer_exchange = no
+dht = auto
+peer_exchange = yes
+dht_port = 6880
 #system.umask.set = 002
 encoding_list = UTF-8
 
@@ -85,6 +86,13 @@ trackers.numwant.set = 100
 network.max_open_sockets.set = 999
 # Maximum number of open files rtorrent can keep open (you have to modify the system wide settings with ulimit!) (`set_max_open_files`)
 network.max_open_files.set = 600
+
+# Tracker settings
+# Adding public DHT servers for easy bootstrapping
+schedule2 = dht_node_1, 5, 0, "dht.add_node=router.utorrent.com:6881"
+schedule2 = dht_node_2, 5, 0, "dht.add_node=dht.transmissionbt.com:6881"
+schedule2 = dht_node_3, 5, 0, "dht.add_node=router.bitcomet.com:6881"
+schedule2 = dht_node_4, 5, 0, "dht.add_node=dht.aelitis.com:6881"
 
 #scheduled throttling not great because of
 #schedule2 = throttle_1,01:00:00,24:00:00,throttle.global_down.max_rate.set_kb=0
