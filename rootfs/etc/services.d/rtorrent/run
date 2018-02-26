@@ -1,14 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-if [ -f "/srv/rtorrent/data/dtach-rtorrent.lock" ]; then
-rm -f /srv/rtorrent/data/dtach-rtorrent.lock || true
-sleep 1s
-fi
 
 echo "starting rtorrent"
-dtach -n /srv/rtorrent/data/dtach-rtorrent.lock \
-s6-setuidgid mediadepot /usr/local/bin/rtorrent \
--n -o import=/srv/rtorrent/config/rtorrent.rc
+su - mediadepot -c "screen -dmfa -S rtorrent /usr/local/bin/rtorrent -n -o import=/srv/rtorrent/config/rtorrent.rc"
+
+
 
 until [[ ( -e "/srv/rtorrent/data/session/rtorrent.lock" ) && ( -e "/srv/rtorrent/data/rtorrent.log" ) ]];
 do

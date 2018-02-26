@@ -1,5 +1,4 @@
 #!/usr/bin/with-contenv bash
 
 echo "starting flood"
-cd /srv/flood/app
-s6-setuidgid mediadepot npm start
+su -c "cd /srv/flood/app && npm start" mediadepot

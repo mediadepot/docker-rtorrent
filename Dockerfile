@@ -22,7 +22,6 @@ ENV LD_LIBRARY_PATH=/usr/local/lib
 RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} && \
  apk add --no-cache \
         ca-certificates \
-        dtach \
         libressl \
 		nodejs \
 		nodejs-npm \
@@ -148,7 +147,7 @@ RUN mkdir -p /srv/flood/app && \
 RUN apk add --no-cache \
 		bash \
         ca-certificates \
-        dtach \
+        screen \
         libressl \
 		nodejs \
 		nodejs-npm \
