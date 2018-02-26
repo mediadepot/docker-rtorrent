@@ -137,7 +137,6 @@ ENV LD_LIBRARY_PATH=/usr/local/lib
 
 #Create rtorrent folder structure & set as volumes
 RUN mkdir -p /srv/flood/app && \
-	mkdir -p /srv/rtorrent/app && \
 	mkdir -p /srv/rtorrent/config && \
 	mkdir -p /srv/rtorrent/data && \
 
