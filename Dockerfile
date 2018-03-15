@@ -170,6 +170,7 @@ COPY rootfs/ /
 # ports and volumes
 VOLUME ["/srv/rtorrent/config", "/srv/rtorrent/data"]
 EXPOSE 8081
+EXPOSE 5000
 EXPOSE 6880-6891
 
 CMD ["/init"]

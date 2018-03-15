@@ -4,8 +4,7 @@
 mkdir -p \
 	/srv/rtorrent/data/flood/db/ \
 	/srv/rtorrent/data/session/ \
-	/srv/rtorrent/data/torrents/ \
-	/run/rtorrent/
+	/srv/rtorrent/data/torrents/
 
 
 #TODO: for testing:
@@ -16,9 +15,9 @@ mkdir -p \
 #chown mediadepot:mediadepot /mnt/downloads
 
 # create the flood-rtorrent communications socket manually, because rtorrent screws up permissions
-rm -rf /run/rtorrent/rtorrent.sock
-python -c "import socket as s; sock = s.socket(s.AF_UNIX); sock.bind('/run/rtorrent/rtorrent.sock')"
-chmod 777 /run/rtorrent/rtorrent.sock
+# rm -rf /run/rtorrent/rtorrent.sock
+# python -c "import socket as s; sock = s.socket(s.AF_UNIX); sock.bind('/run/rtorrent/rtorrent.sock')"
+# chmod 777 /run/rtorrent/rtorrent.sock
 
 # flood config file
 [[ ! -f /srv/flood/app/config.js ]] && \
@@ -58,7 +57,6 @@ fi
 # permissions
 chown mediadepot:users -R /srv/rtorrent/data/
 chown mediadepot:users -R /srv/rtorrent/config/
-chown mediadepot:users -R /run/rtorrent/
 chown mediadepot:users -R /srv/flood/
 
 

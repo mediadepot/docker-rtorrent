@@ -10,7 +10,7 @@ const CONFIG = {
   scgi: {
     host: 'localhost',
     port: 5000,
-    socket: true,
+    socket: false,
     socketPath: '/run/rtorrent/rtorrent.sock'
   },
   ssl: false,

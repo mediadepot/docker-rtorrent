@@ -11,6 +11,7 @@ The following environmental variables must be populated, when running container
 The following ports must be mapped, when running container
 
  - 8081 #webui listen
+ - 5000 rtorrent XMLRPC port.
  - 6881-6891 #daemon listen ports
 
 # Volumes
