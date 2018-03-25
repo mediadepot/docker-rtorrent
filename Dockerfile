@@ -159,7 +159,10 @@ RUN apk add --no-cache \
         zip \
         zlib-dev \
         zlib && \
-	rm -rf /var/cache/apk/* /tmp/*
+	rm -rf /var/cache/apk/* /tmp/* && \
+	cd /srv/rtorrent/data/ && \
+	curl -O -L https://raw.githubusercontent.com/rakshasa/rtorrent-vagrant/master/scripts/xmlrpc2scgi.py
+	# test with:
 
 # Copy the build artifacts from the builder stage.
 COPY --from=builder /tmp/artifacts /

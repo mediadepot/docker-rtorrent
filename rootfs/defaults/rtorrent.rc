@@ -13,7 +13,7 @@ method.insert = cfg.logfile, private|const|string, (cat,(cfg.datadir),"rtorrent.
 
 # Prepare rtorrent communication socket
 # network.scgi.open_local = /run/rtorrent/rtorrent.sock
-network.scgi.open_port = localhost:5000
+network.scgi.open_port = 0.0.0.0:5000
 
 #schedule = socket_chmod,0,0,"execute=chmod,0777,/run/rtorrent/rtorrent.sock"
 #schedule = socket_chgrp,0,0,"execute=chgrp,mediadepot,/run/rtorrent/rtorrent.sock"

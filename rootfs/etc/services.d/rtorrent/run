@@ -11,7 +11,11 @@ do
 sleep 1s
 done
 
-echo "rtorrent started"
+echo "rtorrent started. checking xmlrpc connection.."
+python xmlrpc2scgi.py -p scgi://127.0.0.1:5000 system.hostname
+
+echo "xmlrpc port accessible on 127.0.0.1:5000"
+
 
 # sleep now, rtorrent is running as a detached process, logs are redirected to STDOUT.
 #while :; do sleep 2073600; done
